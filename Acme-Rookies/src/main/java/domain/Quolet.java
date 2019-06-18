@@ -15,6 +15,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
 import javax.validation.constraints.Pattern;
 
+import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.Range;
 import org.hibernate.validator.constraints.SafeHtml;
@@ -48,7 +49,6 @@ public class Quolet extends DomainEntity {
 	}
 
 	@Past
-	@NotNull
 	@Temporal(TemporalType.TIMESTAMP)
 	@DateTimeFormat(pattern = "dd/MM/yyyy HH:mm")
 	public Date getMoment() {
@@ -62,6 +62,7 @@ public class Quolet extends DomainEntity {
 	@SafeHtml(whitelistType = SafeHtml.WhiteListType.NONE)
 	@NotBlank
 	@NotNull
+	@Length(max = 100)
 	public String getBody() {
 		return this.body;
 	}
