@@ -6,6 +6,7 @@ import java.util.Collection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.Assert;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -53,13 +54,13 @@ public class QuoletCompanyController {
 
 			result = new ModelAndView("quolet/list");
 			result.addObject("quolets", quolets);
+			result.addObject("audit", a);
 		} catch (final Exception e) {
 			result = new ModelAndView("redirect:../../");
 		}
 		return result;
 
 	}
-
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public ModelAndView create(@RequestParam final int idAudit) {
 		ModelAndView result;
@@ -73,5 +74,22 @@ public class QuoletCompanyController {
 
 		return result;
 
+	}
+
+	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
+	public ModelAndView edit(@RequestParam final Integer idAudit, final Quolet quolet, final BindingResult binding) {
+		ModelAndView result;
+		Quolet q = null;
+
+		q = this.quoletService.reconstruct(quolet, binding);
+		if (!binding.hasErrors()) {
+			this.quoletService.save(q);
+			result = new ModelAndView("redirect:list.do");
+		} else {
+			result = new ModelAndView("quolet/edit");
+			result.addObject("quolet", quolet);
+		}
+
+		return result;
 	}
 }

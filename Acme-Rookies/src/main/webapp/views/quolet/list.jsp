@@ -19,10 +19,10 @@
 <security:authorize access="hasRole('COMPANY')">
 	
 <display:table pagesize="5" name="quolets" id="row"
-requestURI="quolet/company/list.do" >	
+requestURI="quolet/company/list.do?idAudit=${audit.id }" >	
 </display:table>
 
 <input type="button" name="create" value="<spring:message code="quolet.create" />"
-			onclick="javascript: relativeRedir('quolet/company/create.do?idAudit=${row.id}');" />
+			onclick="javascript: relativeRedir('quolet/company/create.do?idAudit=${audit.id}');" />
 
 </security:authorize>

@@ -15,8 +15,8 @@
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
 
-<security:authorize access="hasRole('CUSTOMER')">
-<form:form action="quolet/customer/edit.do" modelAttribute="quolet">
+<security:authorize access="hasRole('COMPANY')">
+<form:form action="quolet/company/edit.do?idAudit=${idAudit }" modelAttribute="quolet">
 
 	<form:hidden path="id" />
 	<form:hidden path="version" />
@@ -30,8 +30,12 @@
 	</form:select>
 	<form:errors path="draftMode"/>
 <br/>
+<br/>	
+<input type="submit" name="save" 
+	value="<spring:message code="quolet.save" />" />
 	
- 	
+<input type="button" name="cancel" value="<spring:message code="quolet.cancel" />"
+			onclick="javascript: relativeRedir('quolet/company/list.do?idAudit=${audit.id}');" /> 	
 	
 </form:form>
 </security:authorize>
