@@ -63,6 +63,9 @@
 		<bean class="converters.StringToPositionConverter" />
 		<bean class="converters.PositionToStringConverter" />
 		
+		<bean class="converters.StringToQuoletConverter" />
+		<bean class="converters.QuoletToStringConverter" />
+		
 		
 	</util:list>
 	
