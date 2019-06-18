@@ -2,6 +2,7 @@
 package services;
 
 import java.util.Collection;
+import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -95,7 +96,7 @@ public class QuoletService {
 		final Actor a = this.actorService.getActorByUserAccount(user.getId());
 
 		quolet.setCompany((Company) a);
-		quolet.setTicker(QuoletService.generarTicker2((Company) a));
+		quolet.setTicker(this.generar_ticker_quolet(new Date()));
 		quolet.setDraftMode(1);
 		quolet.setMoment(null);
 
@@ -105,13 +106,47 @@ public class QuoletService {
 
 	}
 
-	public static String generarTicker2(final Company company) {
-		final int tam = 4;
+	private String generar_ticker_quolet2(final Date date) {
+		final int tam = 5;
+		final Integer ano = date.getYear() + 1900;
+		final Integer mes = date.getMonth() + 1;
+		final Integer dia = date.getDate();
 
-		final String d = company.getNameCompany().substring(0, 4);
+		String day = dia.toString();
+		String month = mes.toString();
+		if (mes < 10)
+			month = "0" + mes.toString();
+		if (dia < 10)
+			day = "0" + dia.toString();
+
+		String ticker = "";
+		final String a = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+		for (int i = 0; i < tam; i++) {
+			final Integer random = (int) (Math.floor(Math.random() * a.length()) % a.length());
+			ticker = ticker + a.charAt(random);
+		}
+
+		return day + ticker + "-" + month + ano.toString().substring(ano.toString().length() - 2, ano.toString().length());
+
+	}
+
+	private String generar_ticker_quolet(final Date date) {
+		final int tam = 4;
+		final Integer ano = date.getYear() + 1900;
+		final Integer mes = date.getMonth() + 1;
+		final Integer dia = date.getDate();
+
+		String day = dia.toString();
+		String month = mes.toString();
+		if (mes < 10)
+			month = "0" + mes.toString();
+		if (dia < 10)
+			day = "0" + dia.toString();
+		final String d = ano.toString().substring(ano.toString().length() - 2, ano.toString().length()) + month + day;
 
 		String ticker = "-";
-		final String a = "0123456789";
+		final String a = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
 
 		for (int i = 0; i < tam; i++) {
 			final Integer random = (int) (Math.floor(Math.random() * a.length()) % a.length());
@@ -119,6 +154,5 @@ public class QuoletService {
 		}
 
 		return d + ticker;
-
 	}
 }
