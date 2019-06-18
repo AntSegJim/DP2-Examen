@@ -42,6 +42,7 @@ public class QuoletService {
 		q.setDraftMode(1);
 		q.setAudit(new Audit());
 		q.setCompany(new Company());
+		q.setNumMonth(0);
 
 		return q;
 	}
@@ -98,6 +99,7 @@ public class QuoletService {
 		quolet.setTicker(QuoletService.generarTicker2((Company) a));
 		quolet.setDraftMode(1);
 		quolet.setMoment(null);
+		quolet.setNumMonth(0);
 
 		this.validator.validate(res, binding);
 
