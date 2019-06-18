@@ -59,4 +59,19 @@ public class QuoletCompanyController {
 		return result;
 
 	}
+
+	@RequestMapping(value = "/create", method = RequestMethod.GET)
+	public ModelAndView create(@RequestParam final int idAudit) {
+		ModelAndView result;
+
+		final Quolet quolet = this.quoletService.create();
+		final Audit audit = this.auditService.findOne(idAudit);
+
+		result = new ModelAndView("quolet/edit");
+		result.addObject("quolet", quolet);
+		result.addObject("audit", audit);
+
+		return result;
+
+	}
 }
