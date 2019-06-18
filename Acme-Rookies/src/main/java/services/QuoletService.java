@@ -54,6 +54,10 @@ public class QuoletService {
 		return this.quoletRepository.findOne(id);
 	}
 
+	public Collection<Quolet> getQuoletsByCompany(final Integer idAudit) {
+		return this.quoletRepository.getQuoletsByCompany(idAudit);
+	}
+
 	public Quolet save(final Quolet q) {
 
 		if (q.getId() != 0) {
