@@ -29,7 +29,6 @@
 		<form:option value="0" label="Save mode" />		
 	</form:select>
 	<form:errors path="draftMode"/>
-	<acme:selectWithoutNullOption items="" itemLabel="" code="" path=""/>
 <br/>
 	
  	

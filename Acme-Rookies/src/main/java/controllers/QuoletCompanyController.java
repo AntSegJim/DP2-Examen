@@ -11,10 +11,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import repositories.AuditRepository;
 import security.LoginService;
 import security.UserAccount;
 import services.ActorService;
-import services.AuditService;
 import services.QuoletService;
 import domain.Audit;
 import domain.Company;
@@ -31,7 +31,7 @@ public class QuoletCompanyController {
 	private ActorService	actorService;
 
 	@Autowired
-	private AuditService	auditService;
+	private AuditRepository	auditRepository;
 
 
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
@@ -44,9 +44,9 @@ public class QuoletCompanyController {
 			final UserAccount user = LoginService.getPrincipal();
 			final Company c = (Company) this.actorService.getActorByUserAccount(user.getId());
 
-			final Audit a = this.auditService.findOne(idAudit);
+			final Audit a = this.auditRepository.findOne(idAudit);
 			Assert.isTrue(c.equals(a.getPosition().getCompany()));
-			Assert.isTrue(a.getDraftMode() == 1);
+			Assert.isTrue(a.getDraftMode() == 0);
 
 			quolets = this.quoletService.getQuoletsByCompany(idAudit);
 			Assert.notNull(quolets);
@@ -65,7 +65,7 @@ public class QuoletCompanyController {
 		ModelAndView result;
 
 		final Quolet quolet = this.quoletService.create();
-		final Audit audit = this.auditService.findOne(idAudit);
+		final Audit audit = this.auditRepository.findOne(idAudit);
 
 		result = new ModelAndView("quolet/edit");
 		result.addObject("quolet", quolet);

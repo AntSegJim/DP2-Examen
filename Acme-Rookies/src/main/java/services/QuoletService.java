@@ -101,6 +101,7 @@ public class QuoletService {
 		quolet.setDraftMode(1);
 		quolet.setMoment(null);
 		quolet.setNumMonth(0);
+		quolet.setAudit(new Audit());
 
 		this.validator.validate(res, binding);
 

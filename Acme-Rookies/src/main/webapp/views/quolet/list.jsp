@@ -21,4 +21,8 @@
 <display:table pagesize="5" name="quolets" id="row"
 requestURI="quolet/company/list.do" >	
 </display:table>
+
+<input type="button" name="create" value="<spring:message code="quolet.create" />"
+			onclick="javascript: relativeRedir('quolet/company/create.do?idAudit=${row.id}');" />
+
 </security:authorize>
