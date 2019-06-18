@@ -32,6 +32,19 @@ public class Quolet extends DomainEntity {
 	private String	picture;
 	private int		draftMode;
 	private Audit	audit;
+	private Integer	numMonth;
+
+
+	@NotNull
+	public Integer getNumMonth() {
+		return this.numMonth;
+	}
+
+	public void setNumMonth(final Integer numMonth) {
+		this.numMonth = numMonth;
+	}
+
+
 	private Company	company;
 
 
