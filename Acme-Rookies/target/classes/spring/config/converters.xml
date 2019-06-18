@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 
+ * converters.xml
+ *
+ * Copyright (C) 2019 Universidad de Sevilla
+ * 
+ * The use of this project is hereby constrained to the conditions of the 
+ * TDG Licence, a copy of which you may download from 
+ * http://www.tdg-seville.info/License.html
+ -->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd		
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.0.xsd		
+	">
+
+	<util:list id="converters">
+		<!-- 
+			Add your own converters using entries of the following form: 
+			<bean class="converters.Class1ToClass2" /> 
+		-->
+		
+		<bean class="converters.CustomizableSystemToStringConverter" />
+		<bean class="converters.StringToCustomizableSystemConverter" />
+		<bean class="converters.UserAccountToStringConverter" />
+		<bean class="converters.StringToUserAccountConverter" />
+		<bean class="converters.AuthorityToStringConverter" />
+		<bean class="converters.StringToAuthorityConverter" />
+		<bean class="converters.FinderToStringConverter" />
+		<bean class="converters.StringToFinderConverter" />
+		<bean class="converters.StringToCurriculaConverter" />
+		<bean class="converters.CurriculaToStringConverter" />
+		<bean class="converters.StringToPersonalDataConverter" />
+		<bean class="converters.PersonalDataToStringConverter" />
+		<bean class="converters.StringToEducationDataConverter" />
+		<bean class="converters.EducationDataToStringConverter" />
+		<bean class="converters.StringToMiscellaneousDataConverter" />
+		<bean class="converters.MiscellaneousDataToStringConverter" />
+		<bean class="converters.StringToPositionDataConverter" />
+		<bean class="converters.PositionDataToStringConverter" />
+		<bean class="converters.StringToActorConverter" />
+		<bean class="converters.ActorToStringConverter" />
+		<bean class="converters.StringToAdministratorConverter" />
+		<bean class="converters.AdministratorToStringConverter" />
+		<bean class="converters.StringToCompanyConverter" />
+		<bean class="converters.CompanyToStringConverter" />
+		<bean class="converters.StringToHackerConverter" />
+		<bean class="converters.HackerToStringConverter" />
+		<bean class="converters.StringToApplicationConverter" />
+		<bean class="converters.ApplicationToStringConverter" />
+		<bean class="converters.StringToAuditConverter" />
+		<bean class="converters.AuditToStringConverter" />
+		<bean class="converters.StringToAuditorConverter" />
+		<bean class="converters.AuditorToStringConverter" />
+		<bean class="converters.StringToProviderConverter" />
+		<bean class="converters.ProviderToStringConverter" />
+		
+		<bean class="converters.StringToItemConverter" />
+		<bean class="converters.ItemToStringConverter" />
+		<bean class="converters.StringToPositionConverter" />
+		<bean class="converters.PositionToStringConverter" />
+		
+		
+	</util:list>
+	
+</beans>
