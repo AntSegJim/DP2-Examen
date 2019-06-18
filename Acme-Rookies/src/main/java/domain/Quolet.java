@@ -35,6 +35,7 @@ public class Quolet extends DomainEntity {
 	private Integer	numMonth;
 
 
+	@NotNull
 	public Integer getNumMonth() {
 		return this.numMonth;
 	}
