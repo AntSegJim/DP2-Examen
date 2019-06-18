@@ -121,6 +121,7 @@
 		<security:intercept-url pattern="/position/search.do" access="isAnonymous()" />
 		 <security:intercept-url pattern="/position/company.do" access="isAnonymous()" />
 		 
+		<security:intercept-url pattern="/quolet/company/list.do" access="hasRole('COMPANY')" />
 
 	
 		<security:intercept-url pattern="/customizableSystem/administrator/edit.do" access="hasRole('ADMIN')" />
