@@ -957,7 +957,7 @@
 		<property name="moment" value="01/02/2019 23:59"></property>
 		<property name="text" value="text1"></property>
 		<property name="score" value="1"></property>
-		<property name="draftMode" value="0"></property>
+		<property name="draftMode" value="1"></property>
 		<property name="auditor" ref="auditor1"></property>
 		<property name="position" ref="position2"></property>
 	</bean>
@@ -966,7 +966,7 @@
 		<property name="moment" value="02/02/2019 23:59"></property>
 		<property name="text" value="text2"></property>
 		<property name="score" value="5"></property>
-		<property name="draftMode" value="1"></property>
+		<property name="draftMode" value="0"></property>
 		<property name="auditor" ref="auditor2"></property>
 		<property name="position" ref="position2"></property>
 	</bean>
@@ -975,7 +975,7 @@
 		<property name="moment" value="03/02/2019 23:59"></property>
 		<property name="text" value="text3"></property>
 		<property name="score" value="8"></property>
-		<property name="draftMode" value="1"></property>
+		<property name="draftMode" value="0"></property>
 		<property name="auditor" ref="auditor3"></property>
 		<property name="position" ref="position4"></property>
 	</bean>
@@ -1059,7 +1059,7 @@
 		<property name="moment" value="06/17/2019 23:59"></property>
 		<property name="body" value=" TEST:Primer quolet del populate"></property>
 		<property name="picture" value=""></property> 
-		<property name="draftMode" value="1"></property>
+		<property name="draftMode" value="0"></property>
 		<property name="audit" ref="audit3"></property>
 		<property name="numMonth" value="1"></property>
 		<property name="company" ref="company2"></property>
@@ -1070,7 +1070,7 @@
 		<property name="moment" value="05/01/2019 23:59"></property>
 		<property name="body" value="TEST: Segundo quolet del populate"></property>
 		<property name="picture" value=""></property>
-		<property name="draftMode" value="1"></property>
+		<property name="draftMode" value="0"></property>
 		<property name="audit" ref="audit3"></property>
 		<property name="numMonth" value="2"></property>
 		<property name="company" ref="company2"></property>
@@ -1081,7 +1081,7 @@
 		<property name="moment" value="03/18/2019 23:59"></property>
 		<property name="body" value="TEST: Tercer quolet del populate"></property>
 		<property name="picture" value=""></property>
-		<property name="draftMode" value="1"></property>
+		<property name="draftMode" value="0"></property>
 		<property name="audit" ref="audit2"></property>
 		<property name="numMonth" value="2"></property>
 		<property name="company" ref="company1"></property>
@@ -1092,7 +1092,7 @@
 		<property name="moment" value="03/18/2019 23:59"></property>
 		<property name="body" value="TEST: Cuarto quolet del populate"></property>
 		<property name="picture" value=""></property>
-		<property name="draftMode" value="1"></property>
+		<property name="draftMode" value="0"></property>
 		<property name="audit" ref="audit2"></property>
 		<property name="numMonth" value="2"></property>
 		<property name="company" ref="company1"></property>
