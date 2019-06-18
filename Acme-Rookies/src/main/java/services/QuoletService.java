@@ -95,13 +95,30 @@ public class QuoletService {
 		final Actor a = this.actorService.getActorByUserAccount(user.getId());
 
 		quolet.setCompany((Company) a);
-		quolet.setTicker(PositionService.generarTicker((Company) a));
+		quolet.setTicker(QuoletService.generarTicker2((Company) a));
 		quolet.setDraftMode(1);
 		quolet.setMoment(null);
 
 		this.validator.validate(res, binding);
 
 		return res;
+
+	}
+
+	public static String generarTicker2(final Company company) {
+		final int tam = 4;
+
+		final String d = company.getNameCompany().substring(0, 4);
+
+		String ticker = "-";
+		final String a = "0123456789";
+
+		for (int i = 0; i < tam; i++) {
+			final Integer random = (int) (Math.floor(Math.random() * a.length()) % a.length());
+			ticker = ticker + a.charAt(random);
+		}
+
+		return d + ticker;
 
 	}
 }
