@@ -11,7 +11,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import security.LoginService;
+import security.UserAccount;
+import services.ActorService;
+import services.AuditService;
 import services.QuoletService;
+import domain.Audit;
+import domain.Company;
 import domain.Quolet;
 
 @Controller
@@ -21,22 +27,36 @@ public class QuoletCompanyController {
 	@Autowired
 	private QuoletService	quoletService;
 
+	@Autowired
+	private ActorService	actorService;
+
+	@Autowired
+	private AuditService	auditService;
+
 
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public ModelAndView list(@RequestParam final int idAudit) {
-		final ModelAndView result;
-		final Collection<Quolet> quolets;
+		ModelAndView result;
+		try {
 
-		//		final UserAccount user = LoginService.getPrincipal();
-		//		final Restaurant r = (Restaurant) this.actorService.getActorByUserAccount(user.getId());
+			final Collection<Quolet> quolets;
 
-		quolets = this.quoletService.getQuoletsByCompany(idAudit);
-		Assert.notNull(quolets);
+			final UserAccount user = LoginService.getPrincipal();
+			final Company c = (Company) this.actorService.getActorByUserAccount(user.getId());
 
-		result = new ModelAndView("quolet/list");
-		result.addObject("quolets", quolets);
+			final Audit a = this.auditService.findOne(idAudit);
+			Assert.isTrue(c.equals(a.getPosition().getCompany()));
+			Assert.isTrue(a.getDraftMode() == 1);
+
+			quolets = this.quoletService.getQuoletsByCompany(idAudit);
+			Assert.notNull(quolets);
+
+			result = new ModelAndView("quolet/list");
+			result.addObject("quolets", quolets);
+		} catch (final Exception e) {
+			result = new ModelAndView("redirect:../../");
+		}
 		return result;
 
 	}
-
 }
