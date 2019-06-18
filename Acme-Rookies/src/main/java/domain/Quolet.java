@@ -34,6 +34,7 @@ public class Quolet extends DomainEntity {
 	private int		draftMode;
 	private Audit	audit;
 	private Integer	numMonth;
+	private Company	company;
 
 
 	@NotNull
@@ -45,10 +46,6 @@ public class Quolet extends DomainEntity {
 	public void setNumMonth(final Integer numMonth) {
 		this.numMonth = numMonth;
 	}
-
-
-	private Company	company;
-
 
 	@Pattern(regexp = "^[A-z]{4}\\-[0-9]{6}$")
 	@Column(unique = true)
