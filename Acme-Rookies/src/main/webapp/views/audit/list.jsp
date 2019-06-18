@@ -85,6 +85,9 @@ requestURI="audit/company/list.do?idPosition=${row.position.id}" >
 <display:column titleKey="audit.draftMode">
 <jstl:out value="${row.draftMode}"></jstl:out>
 </display:column>
+<display:column>
+<a href="quolet/company/list.do?idAudit=${row.id}"><spring:message code="audit.quolet" /></a>
+</display:column>
 </display:table>
 
 <acme:cancel url="position/company/list.do" code="cancel"/>
