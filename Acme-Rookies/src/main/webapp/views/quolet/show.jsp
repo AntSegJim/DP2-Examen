@@ -17,7 +17,7 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
-<security:authorize access="hasRole('CUSTOMER')">
+<security:authorize access="hasRole('COMPANY')">
 
 	<spring:message code="quolet.ticker" />: ${quolet.ticker} <br />
 	
@@ -34,20 +34,18 @@
 	</jstl:if>
 	<spring:message code="quolet.body" />: ${quolet.body} <br />
 	<spring:message code="quolet.draftMode" />: ${quolet.draftMode} <br />
-	<spring:message code="quolet.fixUpTask" />: ${quolet.fixUpTask.id} <br />
 	<spring:message code="quolet.picture" />: ${quolet.picture} <br />
 
 	<br>
 	<div style="text-align: center;">
-		<a href="burse/customer/list.do?fixUpTaskId=${quolet.fixUpTask.id}"> <spring:message
-				code="quolet.volver" />
-		</a>
+		<input type="button" name="create" value="<spring:message code="quolet.volver" />"
+			onclick="javascript: relativeRedir('quolet/company/list.do?idAudit=${idAudit}');" />
 	</div>
 
 </security:authorize>
 
 
-<security:authorize access="hasRole('HANDYWORKER')">
+<security:authorize access="hasRole('COMPANY')">
 
 	<spring:message code="quolet.ticker" />: ${quolet.ticker} <br />
 	<jstl:if test="${language eq 'es' }">
@@ -63,14 +61,12 @@
 	</jstl:if>
 	<spring:message code="quolet.body" />: ${quolet.body} <br />
 	<spring:message code="quolet.draftMode" />: ${quolet.draftMode} <br />
-	<spring:message code="quolet.fixUpTask" />: ${quolet.fixUpTask.id} <br />
 	<spring:message code="quolet.picture" />: ${quolet.picture} <br />
 
 	<br>
 	<div style="text-align: center;">
-		<a href="burse/handy-worker/list.do?fixUpTaskId=${quolet.fixUpTask.id}"> <spring:message
-				code="quolet.volver" />
-		</a>
+		<input type="button" name="create" value="<spring:message code="quolet.volver" />"
+			onclick="javascript: relativeRedir('quolet/company/list.do?idAudit=${idAudit}');" />
 	</div>
 
 </security:authorize>

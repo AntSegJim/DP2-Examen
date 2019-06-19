@@ -68,8 +68,12 @@ requestURI="quolet/company/list.do?idAudit=${audit.id }" >
 			</jstl:otherwise>
 	</jstl:choose>
 	</display:column>
-	
-</display:table>
+		<display:column>
+			<a
+				href="quolet/company/show.do?idAudit=${audit.id}&idQuolet=${row.id}"><spring:message
+					code="quolet.show" /></a>
+		</display:column>
+	</display:table>
 
 <input type="button" name="create" value="<spring:message code="quolet.create" />"
 			onclick="javascript: relativeRedir('quolet/company/create.do?idAudit=${audit.id}');" />
