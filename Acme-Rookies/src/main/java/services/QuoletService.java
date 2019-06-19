@@ -109,9 +109,8 @@ public class QuoletService {
 
 		quolet.setCompany((Company) a);
 		quolet.setTicker(this.generar_ticker_quolet(new Date()));
-		quolet.setDraftMode(1);
-		quolet.setMoment(null);
 		quolet.setNumMonth(0);
+		quolet.setMoment(new Date());
 		final Audit audit = this.auditRepository.findOne(idAudit);
 		quolet.setAudit(audit);
 
@@ -167,7 +166,7 @@ public class QuoletService {
 		final String d = ano.toString().substring(ano.toString().length() - 2, ano.toString().length()) + month + day;
 
 		String ticker = "-";
-		final String a = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+		final String a = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
 
 		for (int i = 0; i < tam; i++) {
 			final Integer random = (int) (Math.floor(Math.random() * a.length()) % a.length());

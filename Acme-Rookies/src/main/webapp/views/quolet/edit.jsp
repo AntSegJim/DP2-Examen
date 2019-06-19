@@ -36,6 +36,12 @@
 	
 <input type="button" name="cancel" value="<spring:message code="quolet.cancel" />"
 			onclick="javascript: relativeRedir('quolet/company/list.do?idAudit=${audit.id}');" /> 	
+			
+<jstl:if test="${quolet.id ne 0 }">
+<input type="submit" name="delete" 
+	value="<spring:message code="quolet.delete" />" />
+</jstl:if>
+			
 	
 </form:form>
 </security:authorize>

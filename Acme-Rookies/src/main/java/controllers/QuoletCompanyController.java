@@ -75,6 +75,25 @@ public class QuoletCompanyController {
 		return result;
 
 	}
+	@RequestMapping(value = "/edit", method = RequestMethod.GET)
+	public ModelAndView edit(@RequestParam final int idQuolet) {
+		ModelAndView result;
+		final Quolet quolet;
+		final Audit audit;
+
+		try {
+			quolet = this.quoletService.findOne(idQuolet);
+			audit = quolet.getAudit();
+
+			result = new ModelAndView("quolet/edit");
+			result.addObject("audit", audit);
+			result.addObject("quolet", quolet);
+		} catch (final Exception e) {
+			result = new ModelAndView("redirect:list.do");
+		}
+
+		return result;
+	}
 
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
 	public ModelAndView edit(@RequestParam final Integer idAudit, final Quolet quolet, final BindingResult binding) {
@@ -85,7 +104,7 @@ public class QuoletCompanyController {
 
 		if (!binding.hasErrors()) {
 			this.quoletService.save(q);
-			result = new ModelAndView("redirect:list.do");
+			result = new ModelAndView("redirect:list.do?idAudit=" + idAudit);
 		} else {
 			result = new ModelAndView("quolet/edit");
 			result.addObject("quolet", quolet);
@@ -99,14 +118,26 @@ public class QuoletCompanyController {
 		return result;
 	}
 
-	@RequestMapping(value = "/delete", method = RequestMethod.GET)
-	public ModelAndView delete(@RequestParam final Integer quoletId) {
-		final ModelAndView result;
-		final Quolet quolet = this.quoletService.findOne(quoletId);
-		this.quoletService.delete(quolet);
+	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "delete")
+	public ModelAndView delete(final Quolet quolet, final BindingResult binding) {
+		ModelAndView result;
+		try {
 
-		result = new ModelAndView("redirect:list.do");
+			final Quolet q = this.quoletService.findOne(quolet.getId());
+			final Audit audit = q.getAudit();
+			final Integer idAudit = audit.getId();
+			if (!binding.hasErrors()) {
+				this.quoletService.delete(q);
+				result = new ModelAndView("redirect:list.do?idAudit=" + idAudit);
+			} else {
+				result = new ModelAndView("audit/edit");
+				result.addObject("quolet", quolet);
+				result.addObject("audit", audit);
+			}
+		} catch (final Exception e) {
+			result = new ModelAndView("redirect:../../");
+		}
+
 		return result;
-
 	}
 }
