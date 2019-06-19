@@ -116,7 +116,7 @@ public class QuoletService {
 		return res;
 
 	}
-
+	//Ticker para Letras&Numeros x5 - NumerosFecha x6
 	private String generar_ticker_quolet2(final Date date) {
 		final int tam = 5;
 		final Integer ano = date.getYear() + 1900;
@@ -138,7 +138,7 @@ public class QuoletService {
 			ticker = ticker + a.charAt(random);
 		}
 
-		return day + ticker + "-" + month + ano.toString().substring(ano.toString().length() - 2, ano.toString().length());
+		return ticker + "-" + ano.toString().substring(ano.toString().length() - 2, ano.toString().length()) + month + day;
 
 	}
 
