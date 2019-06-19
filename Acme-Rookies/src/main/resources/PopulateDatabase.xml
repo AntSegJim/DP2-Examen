@@ -1055,7 +1055,7 @@
 
 	<!-- Quolet -->
 	<bean id="quolet1TEST" class="domain.Quolet">
-		<property name="ticker" value="jhyt-121220"></property>
+		<property name="ticker" value="765456-juyt"></property>
 		<property name="moment" value="06/17/2019 23:59"></property>
 		<property name="body" value=" TEST:Primer quolet del populate"></property>
 		<property name="picture" value=""></property> 
@@ -1066,7 +1066,7 @@
 	</bean>
 
 	<bean id="quolet2TEST" class="domain.Quolet">
-		<property name="ticker" value="jhyt-121219"></property>
+		<property name="ticker" value="786548-juyp"></property>
 		<property name="moment" value="05/01/2019 23:59"></property>
 		<property name="body" value="TEST: Segundo quolet del populate"></property>
 		<property name="picture" value=""></property>
@@ -1077,7 +1077,7 @@
 	</bean>
 
 	<bean id="quolet3TEST" class="domain.Quolet">
-		<property name="ticker" value="jhyt-121119"></property>
+		<property name="ticker" value="765435-qfun"></property>
 		<property name="moment" value="03/18/2019 23:59"></property>
 		<property name="body" value="TEST: Tercer quolet del populate"></property>
 		<property name="picture" value=""></property>
@@ -1088,7 +1088,7 @@
 	</bean>
 	
 		<bean id="quolet4TEST" class="domain.Quolet">
-		<property name="ticker" value="jhyt-081119"></property>
+		<property name="ticker" value="987891-jorg"></property>
 		<property name="moment" value="03/18/2019 23:59"></property>
 		<property name="body" value="TEST: Cuarto quolet del populate"></property>
 		<property name="picture" value=""></property>
