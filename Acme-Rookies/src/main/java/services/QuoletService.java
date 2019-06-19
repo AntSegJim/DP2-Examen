@@ -130,6 +130,10 @@ public class QuoletService {
 		this.quoletRepository.delete(quolet);
 	}
 
+	public Collection<Quolet> getAllMyQuolets() {
+		return this.quoletRepository.getQuoletsByMyCompany(this.companyRepository.companyUserAccount(LoginService.getPrincipal().getId()).getId());
+	}
+
 	//METODOS AUXILIARES
 
 	//Ticker para Letras&Numeros x5 - NumerosFecha x6
