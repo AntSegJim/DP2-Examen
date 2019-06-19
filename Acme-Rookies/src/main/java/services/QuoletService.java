@@ -197,7 +197,7 @@ public class QuoletService {
 		final List<Quolet> quolets = (List<Quolet>) this.findAll();
 
 		for (int i = 0; i < quolets.size(); i++)
-			if (quolets.get(i).getDraftMode() == 1) {
+			if (quolets.get(i).getDraftMode() == 0) {
 				final Integer months = QuoletService.getMonths(quolets.get(i));
 				quolets.get(i).setNumMonth(months);
 				this.quoletRepository.save(quolets.get(i));
