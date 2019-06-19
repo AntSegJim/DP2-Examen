@@ -84,13 +84,16 @@ public class QuoletService {
 
 		//Comprobacion general: audit asociado este fuera de drafMode
 
-		Assert.isTrue(q.getAudit().getDraftMode() == 1);
+		Assert.isTrue(q.getAudit().getDraftMode() == 0);
 
 		final Quolet saved = this.quoletRepository.save(q);
 		return saved;
 	}
 
 	public Quolet reconstruct(final Quolet quolet, final Integer idAudit, final BindingResult binding) {
+
+		//Añadido idAudit solo para crear
+		//Para modificar obviarlo
 
 		final Quolet res;
 

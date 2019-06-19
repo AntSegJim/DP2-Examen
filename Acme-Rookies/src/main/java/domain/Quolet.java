@@ -47,7 +47,9 @@ public class Quolet extends DomainEntity {
 		this.numMonth = numMonth;
 	}
 
-	@Pattern(regexp = "^[A-z]{4}\\-[0-9]{6}$")
+	//Pattern para Letras x4 - Numero x6
+	//"^[A-z]{4}\\-[0-9]{6}$"
+	@Pattern(regexp = "^[0-9]{6}\\-[A-z]{4}$")
 	@Column(unique = true)
 	@NotNull
 	@NotBlank
