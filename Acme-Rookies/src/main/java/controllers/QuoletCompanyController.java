@@ -61,6 +61,25 @@ public class QuoletCompanyController {
 		return result;
 
 	}
+
+	@RequestMapping(value = "/show", method = RequestMethod.GET)
+	public ModelAndView show(@RequestParam final int idAudit, @RequestParam final int idQuolet) {
+		ModelAndView result;
+
+		try {
+			final Quolet q = this.quoletService.findOne(idQuolet);
+			Assert.notNull(q);
+			Assert.isTrue(this.quoletService.getAllMyQuolets().contains(q));
+			result = new ModelAndView("quolet/show");
+			result.addObject("quolet", q);
+			result.addObject("idAudit", idAudit);
+		} catch (final Exception e) {
+			result = new ModelAndView("redirect:list.do?idAudit=" + idAudit);
+		}
+
+		return result;
+	}
+
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public ModelAndView create(@RequestParam final int idAudit) {
 		ModelAndView result;
