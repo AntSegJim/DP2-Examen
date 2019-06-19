@@ -50,7 +50,9 @@ requestURI="audit/auditor/list.do?idAuditor=${row.auditor.id}" >
 	<a href="audit/auditor/edit.do?auditId=${row.id}"><spring:message code="edit" /></a>
 </jstl:if>
 </display:column>
-
+<display:column>
+<a href="quolet/auditor/list.do?idAudit=${row.id}"><spring:message code="audit.quolet" /></a>
+</display:column>
 </display:table>
 
 <input type="button" name="create" value="<spring:message code="audit.create" />"

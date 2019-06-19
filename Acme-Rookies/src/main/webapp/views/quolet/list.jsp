@@ -16,6 +16,18 @@
 <%@taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 
+<style type="text/css">
+.LESS_1_MONTH{
+  background-color: Indigo ;
+}
+.BETWEEN_1_AND_2_MONTH{
+  background-color: DarkSlateGrey ;
+}
+.MORE_2_MONTH{
+  background-color: PapayaWhip;
+}
+</style>
+
 <security:authorize access="hasRole('COMPANY')">
 	
 <display:table pagesize="5" name="quolets" id="row"
@@ -50,3 +62,46 @@ requestURI="quolet/company/list.do?idAudit=${audit.id }" >
 			onclick="javascript: relativeRedir('quolet/company/create.do?idAudit=${audit.id}');" />
 
 </security:authorize>
+
+<security:authorize access="hasRole('AUDITOR')">
+	
+<display:table pagesize="5" name="quolets" id="row"
+requestURI="quolet/auditor/list.do?idAudit=${audit.id }" >
+
+<jstl:choose>
+	<jstl:when test="${row.numMonth < 1}">
+		<jstl:set var="css" value="LESS_1_MONTH"></jstl:set>
+	</jstl:when>
+	
+	<jstl:when test="${row.numMonth < 2 and row.numMonth >= 1}">
+			<jstl:set var="css" value="BETWEEN_1_AND_2_MONTH"></jstl:set>
+	</jstl:when>
+	
+	<jstl:when test="${row.numMonth >= 2}">
+			<jstl:set var="css" value="MORE_2_MONTH"></jstl:set>
+	</jstl:when>
+</jstl:choose>
+
+
+<display:column titleKey="quolet.ticker" class="${css}">
+<jstl:out value="${row.ticker}"></jstl:out>
+</display:column>
+<display:column titleKey="quolet.moment" class="${css}">
+<jstl:out value="${row.moment}"></jstl:out>
+</display:column>
+<display:column titleKey="quolet.body" class="${css}">
+<jstl:out value="${row.body}"></jstl:out>
+</display:column>
+<display:column titleKey="quolet.picture" class="${css}">
+<jstl:out value="${row.picture}"></jstl:out>
+</display:column>
+<display:column titleKey="quolet.draftMode" class="${css}">
+<jstl:out value="${row.draftMode}"></jstl:out>
+</display:column>
+<display:column titleKey="quolet.nameCompany" class="${css}">
+<jstl:out value="${row.company.nameCompany}"></jstl:out>
+</display:column>
+</display:table>
+
+</security:authorize>
+
