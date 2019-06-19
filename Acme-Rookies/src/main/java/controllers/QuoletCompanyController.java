@@ -77,6 +77,8 @@ public class QuoletCompanyController {
 			result = new ModelAndView("quolet/show");
 			result.addObject("quolet", q);
 			result.addObject("idAudit", idAudit);
+			final String lang = LocaleContextHolder.getLocale().getLanguage();
+			result.addObject("lang", lang);
 		} catch (final Exception e) {
 			result = new ModelAndView("redirect:list.do?idAudit=" + idAudit);
 		}
