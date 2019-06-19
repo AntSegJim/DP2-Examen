@@ -98,4 +98,15 @@ public class QuoletCompanyController {
 
 		return result;
 	}
+
+	@RequestMapping(value = "/delete", method = RequestMethod.GET)
+	public ModelAndView delete(@RequestParam final Integer quoletId) {
+		final ModelAndView result;
+		final Quolet quolet = this.quoletService.findOne(quoletId);
+		this.quoletService.delete(quolet);
+
+		result = new ModelAndView("redirect:list.do");
+		return result;
+
+	}
 }

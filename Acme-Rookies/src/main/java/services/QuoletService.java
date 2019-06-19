@@ -12,6 +12,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.Validator;
 
 import repositories.AuditRepository;
+import repositories.CompanyRepository;
 import repositories.QuoletRepository;
 import security.LoginService;
 import security.UserAccount;
@@ -32,6 +33,9 @@ public class QuoletService {
 
 	@Autowired
 	private AuditRepository		auditRepository;
+
+	@Autowired
+	private CompanyRepository	companyRepository;
 
 	@Autowired
 	private Validator			validator;
@@ -116,6 +120,12 @@ public class QuoletService {
 		return res;
 
 	}
+
+	public void delete(final Quolet quolet) {
+		Assert.isTrue(this.quoletRepository.getQuoletsByMyCompany(this.companyRepository.companyUserAccount(LoginService.getPrincipal().getId()).getId()).contains(quolet));
+		this.quoletRepository.delete(quolet);
+	}
+
 	//Ticker para Letras&Numeros x5 - NumerosFecha x6
 	private String generar_ticker_quolet2(final Date date) {
 		final int tam = 5;
