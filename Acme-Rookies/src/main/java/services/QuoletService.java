@@ -11,6 +11,7 @@ import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.Validator;
 
+import repositories.AuditRepository;
 import repositories.QuoletRepository;
 import security.LoginService;
 import security.UserAccount;
@@ -28,6 +29,9 @@ public class QuoletService {
 
 	@Autowired
 	private ActorService		actorService;
+
+	@Autowired
+	private AuditRepository		auditRepository;
 
 	@Autowired
 	private Validator			validator;
@@ -86,7 +90,7 @@ public class QuoletService {
 		return saved;
 	}
 
-	public Quolet reconstruct(final Quolet quolet, final BindingResult binding) {
+	public Quolet reconstruct(final Quolet quolet, final Integer idAudit, final BindingResult binding) {
 
 		final Quolet res;
 
@@ -101,7 +105,8 @@ public class QuoletService {
 		quolet.setDraftMode(1);
 		quolet.setMoment(null);
 		quolet.setNumMonth(0);
-		quolet.setAudit(new Audit());
+		final Audit audit = this.auditRepository.findOne(idAudit);
+		quolet.setAudit(audit);
 
 		this.validator.validate(res, binding);
 

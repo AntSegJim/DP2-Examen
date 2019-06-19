@@ -16,8 +16,8 @@
 
 
 <security:authorize access="hasRole('COMPANY')">
-<form:form action="quolet/company/edit.do?idAudit=${idAudit }" modelAttribute="quolet">
-
+<form:form action="quolet/company/edit.do?idAudit=${audit.id }" modelAttribute="quolet">
+${quolet.ticker }
 	<form:hidden path="id" />
 	<form:hidden path="version" />
 	

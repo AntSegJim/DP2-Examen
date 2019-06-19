@@ -81,13 +81,19 @@ public class QuoletCompanyController {
 		ModelAndView result;
 		Quolet q = null;
 
-		q = this.quoletService.reconstruct(quolet, binding);
+		q = this.quoletService.reconstruct(quolet, idAudit, binding);
+
 		if (!binding.hasErrors()) {
 			this.quoletService.save(q);
 			result = new ModelAndView("redirect:list.do");
 		} else {
 			result = new ModelAndView("quolet/edit");
 			result.addObject("quolet", quolet);
+			//final Audit a = this.auditRepository.findOne(idAudit);
+			final Audit a = this.auditRepository.findOne(idAudit);
+			result.addObject("audit", a);
+			result.addObject("b", binding);
+
 		}
 
 		return result;
