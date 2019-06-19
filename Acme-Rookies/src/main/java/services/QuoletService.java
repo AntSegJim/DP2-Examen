@@ -3,6 +3,7 @@ package services;
 
 import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -125,6 +126,8 @@ public class QuoletService {
 		this.quoletRepository.delete(quolet);
 	}
 
+	//METODOS AUXILIARES
+
 	//Ticker para Letras&Numeros x5 - NumerosFecha x6
 	private String generar_ticker_quolet2(final Date date) {
 		final int tam = 5;
@@ -175,4 +178,30 @@ public class QuoletService {
 
 		return d + ticker;
 	}
+
+	//CALCULA LOS MESES DE DIFERENCIA DE UN QUOLET
+	public static Integer getMonths(final Quolet quolet) {
+		Integer res = 0;
+
+		final Date dateCheck = quolet.getMoment();
+		final Date actual = new Date();
+
+		final Integer difA = ((actual.getYear() + 1900) - (dateCheck.getYear() + 1900));
+		res = difA * 12 + actual.getMonth() - dateCheck.getMonth();
+
+		return res;
+	}
+
+	//METODO QUE ACTUALIZA LOS MESES DE LOS QUOLETS QUE ESTAN EN SAVE MODE
+	public void updateMonths() {
+		final List<Quolet> quolets = (List<Quolet>) this.findAll();
+
+		for (int i = 0; i < quolets.size(); i++)
+			if (quolets.get(i).getDraftMode() == 1) {
+				final Integer months = QuoletService.getMonths(quolets.get(i));
+				quolets.get(i).setNumMonth(months);
+				this.quoletRepository.save(quolets.get(i));
+			}
+	}
+
 }

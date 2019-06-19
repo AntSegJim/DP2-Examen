@@ -51,7 +51,6 @@ public class QuoletCompanyController {
 
 			quolets = this.quoletService.getQuoletsByCompany(idAudit);
 			Assert.notNull(quolets);
-
 			result = new ModelAndView("quolet/list");
 			result.addObject("quolets", quolets);
 			result.addObject("audit", a);
