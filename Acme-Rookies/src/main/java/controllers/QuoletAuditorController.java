@@ -4,6 +4,7 @@ package controllers;
 import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -52,9 +53,13 @@ public class QuoletAuditorController {
 
 			this.quoletService.updateMonths();
 
+			final String lang = LocaleContextHolder.getLocale().getLanguage();
+
 			result = new ModelAndView("quolet/list");
 			result.addObject("quolets", quolets);
 			result.addObject("audit", a);
+			result.addObject("lang", lang);
+
 		} catch (final Exception e) {
 			result = new ModelAndView("redirect:../../");
 		}

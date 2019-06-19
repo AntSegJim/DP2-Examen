@@ -33,29 +33,42 @@
 <display:table pagesize="5" name="quolets" id="row"
 requestURI="quolet/company/list.do?idAudit=${audit.id }" >
 
-<display:column>
-<jstl:if test="${(row.draftMode eq 1)}">
-	<a href="quolet/company/edit.do?idQuolet=${row.id}"><spring:message code="quolet.edit" /></a>
-</jstl:if>
-</display:column>	
-<display:column titleKey="quolet.ticker">
-<jstl:out value="${row.ticker}"></jstl:out>
-</display:column>
-<display:column titleKey="quolet.moment">
-<jstl:out value="${row.moment}"></jstl:out>
-</display:column>
-<display:column titleKey="quolet.body">
-<jstl:out value="${row.body}"></jstl:out>
-</display:column>
-<display:column titleKey="quolet.picture">
-<jstl:out value="${row.picture}"></jstl:out>
-</display:column>
-<display:column titleKey="quolet.draftMode">
-<jstl:out value="${row.draftMode}"></jstl:out>
-</display:column>
-<display:column titleKey="quolet.nameCompany">
-<jstl:out value="${row.company.nameCompany}"></jstl:out>
-</display:column>
+	<display:column>
+		<jstl:if test="${(row.draftMode eq 1)}">
+			<a href="quolet/company/edit.do?idQuolet=${row.id}"><spring:message code="quolet.edit" /></a>
+		</jstl:if>
+	</display:column>	
+	
+	<display:column titleKey="quolet.ticker">
+		<jstl:out value="${row.ticker}"></jstl:out>
+	</display:column>
+	
+	<jstl:choose>
+		<jstl:when test="${lang eq 'en'}">
+			<display:column property="moment" titleKey="quolet.moment" format="{0,date,yy/MM/dd hh:mm}"  />
+		</jstl:when>
+		
+		<jstl:otherwise>
+			<display:column property="moment" titleKey="quolet.moment" format="{0,date,dd-MM-yy hh:mm}"  />
+		</jstl:otherwise>
+	</jstl:choose>
+	
+	<display:column titleKey="quolet.body">
+		<jstl:out value="${row.body}"></jstl:out>
+	</display:column>
+	
+	<display:column titleKey="quolet.draftMode">
+		<jstl:choose>
+			<jstl:when test="${row.draftMode eq 0}">
+				<spring:message code="quolet.inSaveMode" /> 
+			</jstl:when>
+		
+			<jstl:otherwise>
+				<spring:message code="quolet.inDraftMode" />
+			</jstl:otherwise>
+	</jstl:choose>
+	</display:column>
+	
 </display:table>
 
 <input type="button" name="create" value="<spring:message code="quolet.create" />"
@@ -83,24 +96,36 @@ requestURI="quolet/auditor/list.do?idAudit=${audit.id }" >
 </jstl:choose>
 
 
-<display:column titleKey="quolet.ticker" class="${css}">
-<jstl:out value="${row.ticker}"></jstl:out>
-</display:column>
-<display:column titleKey="quolet.moment" class="${css}">
-<jstl:out value="${row.moment}"></jstl:out>
-</display:column>
-<display:column titleKey="quolet.body" class="${css}">
-<jstl:out value="${row.body}"></jstl:out>
-</display:column>
-<display:column titleKey="quolet.picture" class="${css}">
-<jstl:out value="${row.picture}"></jstl:out>
-</display:column>
-<display:column titleKey="quolet.draftMode" class="${css}">
-<jstl:out value="${row.draftMode}"></jstl:out>
-</display:column>
-<display:column titleKey="quolet.nameCompany" class="${css}">
-<jstl:out value="${row.company.nameCompany}"></jstl:out>
-</display:column>
+	<display:column titleKey="quolet.ticker" class="${css}">
+		<jstl:out value="${row.ticker}"></jstl:out>
+	</display:column>
+	
+	<jstl:choose>
+		<jstl:when test="${lang eq 'en'}">
+			<display:column property="moment" class="${css}" titleKey="quolet.moment" format="{0,date,yy/MM/dd hh:mm}"  />
+		</jstl:when>
+		
+		<jstl:otherwise>
+			<display:column property="moment" class="${css}" titleKey="quolet.moment" format="{0,date,dd-MM-yy hh:mm}"  />
+		</jstl:otherwise>
+	</jstl:choose>
+	
+	<display:column titleKey="quolet.body" class="${css}">
+		<jstl:out value="${row.body}"></jstl:out>
+	</display:column>
+	
+	<display:column titleKey="quolet.picture" class="${css}">
+		<jstl:out value="${row.picture}"></jstl:out>
+	</display:column>
+	
+	<display:column titleKey="quolet.draftMode" class="${css}">
+		<jstl:out value="${row.draftMode}"></jstl:out>
+	</display:column>
+	
+	<display:column titleKey="quolet.nameCompany" class="${css}">
+		<jstl:out value="${row.company.nameCompany}"></jstl:out>
+	</display:column>
+	
 </display:table>
 
 </security:authorize>
