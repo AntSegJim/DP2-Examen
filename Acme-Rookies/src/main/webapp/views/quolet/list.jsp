@@ -153,5 +153,8 @@ requestURI="quolet/auditor/list.do?idAudit=${audit.id }" >
 
 	</display:table>
 
+<input type="button" name="cancel" value="<spring:message code="quolet.cancel" />"
+			onclick="javascript: relativeRedir('audit/auditor/list.do');" />
+
 </security:authorize>
 
