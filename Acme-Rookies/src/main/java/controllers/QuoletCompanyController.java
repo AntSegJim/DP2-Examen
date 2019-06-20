@@ -61,6 +61,7 @@ public class QuoletCompanyController {
 			result.addObject("quolets", quolets);
 			result.addObject("audit", a);
 			result.addObject("lang", lang);
+			result.addObject("position", a.getPosition());
 		} catch (final Exception e) {
 			result = new ModelAndView("redirect:../../");
 		}

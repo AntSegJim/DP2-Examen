@@ -91,6 +91,8 @@ requestURI="quolet/company/list.do?idAudit=${audit.id }" >
 <input type="button" name="create" value="<spring:message code="quolet.create" />"
 			onclick="javascript: relativeRedir('quolet/company/create.do?idAudit=${audit.id}');" />
 
+<input type="button" name="cancel" value="<spring:message code="quolet.cancel" />"
+			onclick="javascript: relativeRedir('audit/company/list.do?positionId=${position.id}');" />
 </security:authorize>
 
 <security:authorize access="hasRole('AUDITOR')">
