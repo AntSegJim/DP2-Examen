@@ -110,22 +110,42 @@ public class QuoletService {
 
 		final Quolet res;
 
-		//if (position.getId() == 0) {
-		res = quolet;
+		if (quolet.getId() == 0) {
+			res = quolet;
 
-		final UserAccount user = LoginService.getPrincipal();
-		final Actor a = this.actorService.getActorByUserAccount(user.getId());
+			final UserAccount user = LoginService.getPrincipal();
+			final Actor a = this.actorService.getActorByUserAccount(user.getId());
 
-		quolet.setCompany((Company) a);
-		quolet.setTicker(this.generar_ticker_quolet(new Date()));
-		quolet.setNumMonth(0);
-		quolet.setMoment(new Date());
-		final Audit audit = this.auditRepository.findOne(idAudit);
-		quolet.setAudit(audit);
+			quolet.setCompany((Company) a);
+			quolet.setTicker(this.generar_ticker_quolet(new Date()));
+			quolet.setNumMonth(0);
+			quolet.setMoment(new Date());
+			final Audit audit = this.auditRepository.findOne(idAudit);
+			quolet.setAudit(audit);
 
-		this.validator.validate(res, binding);
+			this.validator.validate(res, binding);
+			return res;
+		} else {
+			res = this.quoletRepository.findOne(quolet.getId());
+			final Quolet copy = new Quolet();
+			copy.setId(res.getId());
+			copy.setVersion(res.getVersion());
+			copy.setCompany(res.getCompany());
+			copy.setTicker(res.getTicker());
+			copy.setNumMonth(res.getNumMonth());
+			copy.setMoment(res.getMoment());
+			copy.setDraftMode(quolet.getDraftMode());
+			copy.setBody(quolet.getBody());
+			copy.setPicture(quolet.getPicture());
+			copy.setAudit(res.getAudit());
 
-		return res;
+			if (copy.getDraftMode() == 0)
+				copy.setMoment(new Date());
+
+			this.validator.validate(copy, binding);
+
+			return copy;
+		}
 
 	}
 
