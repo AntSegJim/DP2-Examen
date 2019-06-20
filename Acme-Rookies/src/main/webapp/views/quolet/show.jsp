@@ -19,6 +19,22 @@
 
 <security:authorize access="hasRole('COMPANY')">
 
+	<jstl:choose>
+		<jstl:when test="${quolet.numMonth < 1}">
+			<jstl:set var="css" value="Indigo"></jstl:set>
+		</jstl:when>
+
+		<jstl:when test="${quolet.numMonth < 2 and quolet.numMonth >= 1}">
+			<jstl:set var="css" value="DarkSlateGrey"></jstl:set>
+		</jstl:when>
+
+		<jstl:when test="${quolet.numMonth >= 2}">
+			<jstl:set var="css" value="PapayaWhip"></jstl:set>
+		</jstl:when>
+	</jstl:choose>
+	
+	<div style="border: 10px solid ${css}; border-radius: 5px; display:inline-block; padding:1em;">
+
 	<b><spring:message code="quolet.ticker" />:</b> <jstl:out value="${quolet.ticker}"></jstl:out> <br />
 	
 	<jstl:if test="${lang eq 'es' }">
@@ -47,7 +63,7 @@
 	<img width="400px" height="200px" src="<jstl:out value='${quolet.picture }'/> "><br/>
 	<br />
 
-	
+	</div>
 		<input type="button" name="create" value="<spring:message code="quolet.volver" />"
 			onclick="javascript: relativeRedir('quolet/company/list.do?idAudit=${idAudit}');" />
 	

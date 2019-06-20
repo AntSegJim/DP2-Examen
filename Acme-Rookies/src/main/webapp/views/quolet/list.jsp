@@ -83,7 +83,7 @@ requestURI="quolet/company/list.do?idAudit=${audit.id }" >
 	</jstl:choose>
 	</display:column>
 		<display:column class="${css}">
-			<a href="quolet/company/show.do?idAudit=${audit.id}&idQuolet=${row.id}"><spring:message
+			<a style="color:white;"  href="quolet/company/show.do?idAudit=${audit.id}&idQuolet=${row.id}"><spring:message
 					code="quolet.show" /></a>
 		</display:column>
 	</display:table>
