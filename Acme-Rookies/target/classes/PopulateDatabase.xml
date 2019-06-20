@@ -976,7 +976,7 @@
 		<property name="text" value="text3"></property>
 		<property name="score" value="8"></property>
 		<property name="draftMode" value="0"></property>
-		<property name="auditor" ref="auditor3"></property>
+		<property name="auditor" ref="auditor1"></property>
 		<property name="position" ref="position4"></property>
 	</bean>
 
