@@ -125,6 +125,9 @@ public class QuoletService {
 			final Audit audit = this.auditRepository.findOne(idAudit);
 			quolet.setAudit(audit);
 
+			if (quolet.getDraftMode() == 0)
+				quolet.setMoment(new Date());
+
 			this.validator.validate(res, binding);
 			return res;
 		} else {

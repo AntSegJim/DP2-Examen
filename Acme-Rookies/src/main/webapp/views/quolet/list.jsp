@@ -49,7 +49,7 @@ requestURI="quolet/company/list.do?idAudit=${audit.id }" >
 
 	<display:column class="${css}">
 		<jstl:if test="${(row.draftMode eq 1)}">
-			<a href="quolet/company/edit.do?idQuolet=${row.id}"><spring:message code="quolet.edit" /></a>
+			<a style="color:white;" href="quolet/company/edit.do?idQuolet=${row.id}"><spring:message code="quolet.edit" /></a>
 		</jstl:if>
 	</display:column>	
 	
@@ -83,8 +83,8 @@ requestURI="quolet/company/list.do?idAudit=${audit.id }" >
 	</jstl:choose>
 	</display:column>
 		<display:column class="${css}">
-			<a style="color:white;"  href="quolet/company/show.do?idAudit=${audit.id}&idQuolet=${row.id}"><spring:message
-					code="quolet.show" /></a>
+
+			<a style="color:white;" href="quolet/company/show.do?idAudit=${audit.id}&idQuolet=${row.id}"><spring:message code="quolet.show" /></a>
 		</display:column>
 	</display:table>
 
