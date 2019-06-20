@@ -20,4 +20,8 @@ public interface QuoletRepository extends JpaRepository<Quolet, Integer> {
 
 	@Query("select q from Quolet q where q.company.id = ?1")
 	public Collection<Quolet> getQuoletsByMyCompany(Integer idCompany);
+
+	@Query("select q from Quolet q where q.audit.auditor.id = ?1 and q.draftMode=0")
+	public Collection<Quolet> getMyQuoletsAuditor(int idAuditor);
+
 }

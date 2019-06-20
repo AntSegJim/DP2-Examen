@@ -67,4 +67,24 @@ public class QuoletAuditorController {
 
 	}
 
+	@RequestMapping(value = "/show", method = RequestMethod.GET)
+	public ModelAndView show(@RequestParam final int idAudit, @RequestParam final int idQuolet) {
+		ModelAndView result;
+
+		try {
+			final Quolet q = this.quoletService.findOne(idQuolet);
+			Assert.notNull(q);
+			Assert.isTrue(this.quoletService.getMyQuoletsAuditor().contains(q));
+			result = new ModelAndView("quolet/show");
+			result.addObject("quolet", q);
+			result.addObject("idAudit", idAudit);
+			final String lang = LocaleContextHolder.getLocale().getLanguage();
+			result.addObject("lang", lang);
+		} catch (final Exception e) {
+			result = new ModelAndView("redirect:../../");
+		}
+
+		return result;
+	}
+
 }

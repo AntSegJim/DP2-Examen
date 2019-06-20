@@ -13,6 +13,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.Validator;
 
 import repositories.AuditRepository;
+import repositories.AuditorRepository;
 import repositories.CompanyRepository;
 import repositories.QuoletRepository;
 import security.LoginService;
@@ -37,6 +38,9 @@ public class QuoletService {
 
 	@Autowired
 	private CompanyRepository	companyRepository;
+
+	@Autowired
+	private AuditorRepository	auditorRepository;
 
 	@Autowired
 	private Validator			validator;
@@ -132,6 +136,10 @@ public class QuoletService {
 
 	public Collection<Quolet> getAllMyQuolets() {
 		return this.quoletRepository.getQuoletsByMyCompany(this.companyRepository.companyUserAccount(LoginService.getPrincipal().getId()).getId());
+	}
+
+	public Collection<Quolet> getMyQuoletsAuditor() {
+		return this.quoletRepository.getMyQuoletsAuditor(this.auditorRepository.auditorUserAccount(LoginService.getPrincipal().getId()).getId());
 	}
 
 	//METODOS AUXILIARES

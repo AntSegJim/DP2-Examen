@@ -129,8 +129,14 @@ requestURI="quolet/auditor/list.do?idAudit=${audit.id }" >
 	<display:column titleKey="quolet.nameCompany" class="${css}">
 		<jstl:out value="${row.company.nameCompany}"></jstl:out>
 	</display:column>
-	
-</display:table>
+
+		<display:column class="${css}" >
+			<a style="color:white;" 
+				href="quolet/auditor/show.do?idAudit=${audit.id}&idQuolet=${row.id}"><spring:message
+					code="quolet.show" /></a>
+		</display:column>
+
+	</display:table>
 
 </security:authorize>
 
