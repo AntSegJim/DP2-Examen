@@ -1,6 +1,7 @@
 
 package services;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
@@ -20,6 +21,7 @@ import security.LoginService;
 import security.UserAccount;
 import domain.Actor;
 import domain.Audit;
+import domain.Auditor;
 import domain.Company;
 import domain.Quolet;
 
@@ -231,7 +233,17 @@ public class QuoletService {
 
 	//METODO QUE ACTUALIZA LOS MESES DE LOS QUOLETS QUE ESTAN EN SAVE MODE
 	public void updateMonths() {
-		final List<Quolet> quolets = (List<Quolet>) this.findAll();
+		List<Quolet> quolets = new ArrayList<>();
+
+		final UserAccount user = LoginService.getPrincipal();
+
+		if (user.getAuthorities().iterator().next().getAuthority().equals("COMPANY")) {
+			final Company c = (Company) this.actorService.getActorByUserAccount(user.getId());
+			quolets = (List<Quolet>) this.quoletRepository.getQuoletsByMyCompany(c.getId());
+		} else {
+			final Auditor a = (Auditor) this.actorService.getActorByUserAccount(user.getId());
+			quolets = (List<Quolet>) this.quoletRepository.getMyQuoletsAuditor(a.getId());
+		}
 
 		for (int i = 0; i < quolets.size(); i++)
 			if (quolets.get(i).getDraftMode() == 0) {
@@ -240,5 +252,4 @@ public class QuoletService {
 				this.quoletRepository.save(quolets.get(i));
 			}
 	}
-
 }
