@@ -19,21 +19,21 @@
 
 <security:authorize access="hasRole('COMPANY')">
 
-	<spring:message code="quolet.ticker" />: <jstl:out value="${quolet.ticker}"></jstl:out> <br />
+	<b><spring:message code="quolet.ticker" />:</b> <jstl:out value="${quolet.ticker}"></jstl:out> <br />
 	
 	<jstl:if test="${lang eq 'es' }">
-	<spring:message code="quolet.moment" />:
+	<b><spring:message code="quolet.moment" />:</b>
 		<fmt:formatDate value="${quolet.moment}" pattern="dd-MM-yy HH:mm" />
 		<br />
 	</jstl:if>
 	
 	<jstl:if test="${lang eq 'en' }">
-	<spring:message code="quolet.moment" />:
+	<b><spring:message code="quolet.moment" />:</b>
 		<fmt:formatDate value="${quolet.moment}" pattern="yy/MM/dd HH:mm" />
 		<br />
 	</jstl:if>
-	<spring:message code="quolet.body" />: <jstl:out value="${quolet.body}"></jstl:out> <br />
-	<spring:message code="quolet.draftMode" />:
+	<b><spring:message code="quolet.body" />:</b> <jstl:out value="${quolet.body}"></jstl:out> <br />
+	<b><spring:message code="quolet.draftMode" />:</b>
 		<jstl:choose>
 			<jstl:when test="${quolet.draftMode eq 0}">
 				<spring:message code="quolet.inSaveMode" /> <br/>
@@ -43,13 +43,14 @@
 				<spring:message code="quolet.inDraftMode" /><br/>
 			</jstl:otherwise>
 	</jstl:choose>
-	<spring:message code="quolet.picture" />: <jstl:out value="${quolet.picture}"></jstl:out> <br />
+	<b><spring:message code="quolet.picture" />: </b><br/>
+	<img width="400px" height="200px" src="<jstl:out value='${quolet.picture }'/> "><br/>
+	<br />
 
-	<br>
-	<div style="text-align: center;">
+	
 		<input type="button" name="create" value="<spring:message code="quolet.volver" />"
 			onclick="javascript: relativeRedir('quolet/company/list.do?idAudit=${idAudit}');" />
-	</div>
+	
 
 </security:authorize>
 
@@ -95,7 +96,8 @@
 					<spring:message code="quolet.inDraftMode" /><br/>
 				</jstl:otherwise>
 		</jstl:choose>
-		<spring:message code="quolet.picture" />: <jstl:out value="${quolet.picture}"></jstl:out> <br />
+		<spring:message code="quolet.picture" />: <br />
+		<img width="400px" height="200px" src="<jstl:out value='${quolet.picture }'/> "><br/>
 	
 		<br>
 	</div>

@@ -121,7 +121,7 @@ public class QuoletService {
 			quolet.setCompany((Company) a);
 			quolet.setTicker(this.generar_ticker_quolet(new Date()));
 			quolet.setNumMonth(0);
-			quolet.setMoment(new Date());
+			quolet.setMoment(null);
 			final Audit audit = this.auditRepository.findOne(idAudit);
 			quolet.setAudit(audit);
 
