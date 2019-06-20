@@ -53,6 +53,8 @@ public class QuoletCompanyController {
 			quolets = this.quoletService.getQuoletsByCompany(idAudit);
 			Assert.notNull(quolets);
 
+			this.quoletService.updateMonths();
+
 			final String lang = LocaleContextHolder.getLocale().getLanguage();
 
 			result = new ModelAndView("quolet/list");
@@ -109,12 +111,13 @@ public class QuoletCompanyController {
 		try {
 			quolet = this.quoletService.findOne(idQuolet);
 			audit = quolet.getAudit();
+			Assert.isTrue(quolet.getDraftMode() == 1);
 
 			result = new ModelAndView("quolet/edit");
 			result.addObject("audit", audit);
 			result.addObject("quolet", quolet);
 		} catch (final Exception e) {
-			result = new ModelAndView("redirect:list.do");
+			result = new ModelAndView("redirect:../../");
 		}
 
 		return result;
@@ -123,21 +126,27 @@ public class QuoletCompanyController {
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
 	public ModelAndView edit(@RequestParam final Integer idAudit, final Quolet quolet, final BindingResult binding) {
 		ModelAndView result;
-		Quolet q = null;
+		try {
+			Quolet q = null;
 
-		q = this.quoletService.reconstruct(quolet, idAudit, binding);
+			q = this.quoletService.reconstruct(quolet, idAudit, binding);
 
-		if (!binding.hasErrors()) {
-			this.quoletService.save(q);
-			result = new ModelAndView("redirect:list.do?idAudit=" + idAudit);
-		} else {
+			if (!binding.hasErrors()) {
+				this.quoletService.save(q);
+				result = new ModelAndView("redirect:list.do?idAudit=" + idAudit);
+			} else {
+				result = new ModelAndView("quolet/edit");
+				result.addObject("quolet", quolet);
+				final Audit a = this.auditRepository.findOne(idAudit);
+				result.addObject("audit", a);
+
+			}
+		} catch (final Exception e) {
 			result = new ModelAndView("quolet/edit");
 			result.addObject("quolet", quolet);
-			//final Audit a = this.auditRepository.findOne(idAudit);
 			final Audit a = this.auditRepository.findOne(idAudit);
 			result.addObject("audit", a);
-			result.addObject("b", binding);
-
+			result.addObject("exception", e);
 		}
 
 		return result;

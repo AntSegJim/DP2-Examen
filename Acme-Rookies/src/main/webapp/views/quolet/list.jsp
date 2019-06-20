@@ -33,31 +33,45 @@
 <display:table pagesize="5" name="quolets" id="row"
 requestURI="quolet/company/list.do?idAudit=${audit.id }" >
 
-	<display:column>
+	<jstl:choose>
+		<jstl:when test="${row.numMonth < 1}">
+			<jstl:set var="css" value="LESS_1_MONTH"></jstl:set>
+		</jstl:when>
+	
+		<jstl:when test="${row.numMonth < 2 and row.numMonth >= 1}">
+				<jstl:set var="css" value="BETWEEN_1_AND_2_MONTH"></jstl:set>
+		</jstl:when>
+	
+		<jstl:when test="${row.numMonth >= 2}">
+				<jstl:set var="css" value="MORE_2_MONTH"></jstl:set>
+		</jstl:when>
+	</jstl:choose>
+
+	<display:column class="${css}">
 		<jstl:if test="${(row.draftMode eq 1)}">
 			<a href="quolet/company/edit.do?idQuolet=${row.id}"><spring:message code="quolet.edit" /></a>
 		</jstl:if>
 	</display:column>	
 	
-	<display:column titleKey="quolet.ticker">
+	<display:column class="${css}" titleKey="quolet.ticker">
 		<jstl:out value="${row.ticker}"></jstl:out>
 	</display:column>
 	
 	<jstl:choose>
 		<jstl:when test="${lang eq 'en'}">
-			<display:column property="moment" titleKey="quolet.moment" format="{0,date,yy/MM/dd hh:mm}"  />
+			<display:column class="${css}" property="moment" titleKey="quolet.moment" format="{0,date,yy/MM/dd hh:mm}"  />
 		</jstl:when>
 		
 		<jstl:otherwise>
-			<display:column property="moment" titleKey="quolet.moment" format="{0,date,dd-MM-yy hh:mm}"  />
+			<display:column class="${css}" property="moment" titleKey="quolet.moment" format="{0,date,dd-MM-yy hh:mm}"  />
 		</jstl:otherwise>
 	</jstl:choose>
 	
-	<display:column titleKey="quolet.body">
+	<display:column class="${css}" titleKey="quolet.body">
 		<jstl:out value="${row.body}"></jstl:out>
 	</display:column>
 	
-	<display:column titleKey="quolet.draftMode">
+	<display:column class="${css}" titleKey="quolet.draftMode">
 		<jstl:choose>
 			<jstl:when test="${row.draftMode eq 0}">
 				<spring:message code="quolet.inSaveMode" /> 
@@ -68,9 +82,8 @@ requestURI="quolet/company/list.do?idAudit=${audit.id }" >
 			</jstl:otherwise>
 	</jstl:choose>
 	</display:column>
-		<display:column>
-			<a
-				href="quolet/company/show.do?idAudit=${audit.id}&idQuolet=${row.id}"><spring:message
+		<display:column class="${css}">
+			<a href="quolet/company/show.do?idAudit=${audit.id}&idQuolet=${row.id}"><spring:message
 					code="quolet.show" /></a>
 		</display:column>
 	</display:table>

@@ -18,6 +18,10 @@
 <security:authorize access="hasRole('COMPANY')">
 <form:form action="quolet/company/edit.do?idAudit=${audit.id }" modelAttribute="quolet">
 
+	<jstl:if test="${not empty exception}">
+		<p style="color:red"> <spring:message code="position.error" /> </p>
+	</jstl:if>
+
 	<form:hidden path="id" />
 	<form:hidden path="version" />
 	

@@ -150,6 +150,7 @@ public class QuoletService {
 	}
 
 	public void delete(final Quolet quolet) {
+		Assert.isTrue(quolet.getDraftMode() == 1);
 		Assert.isTrue(this.quoletRepository.getQuoletsByMyCompany(this.companyRepository.companyUserAccount(LoginService.getPrincipal().getId()).getId()).contains(quolet));
 		this.quoletRepository.delete(quolet);
 	}
