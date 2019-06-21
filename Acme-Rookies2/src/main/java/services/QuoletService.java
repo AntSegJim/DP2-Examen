@@ -57,7 +57,7 @@ public class QuoletService {
 		q.setPicture(null);
 		q.setDraftMode(1);
 		q.setAudit(new Audit());
-		q.setCompany(new Company());
+		q.setAuditor(new Auditor());
 		q.setNumMonth(0);
 
 		return q;
@@ -86,7 +86,7 @@ public class QuoletService {
 			//Lo modifica la company que lo ha creado
 			final UserAccount user = LoginService.getPrincipal();
 			final Actor a = this.actorService.getActorByUserAccount(user.getId());
-			Assert.isTrue(q.getCompany().equals(a));
+			Assert.isTrue(q.getAuditor().equals(a));
 
 			//El que estaba en base de datos no estaba en modo final
 			final Quolet older = this.quoletRepository.findOne(q.getId());
@@ -118,7 +118,7 @@ public class QuoletService {
 			final UserAccount user = LoginService.getPrincipal();
 			final Actor a = this.actorService.getActorByUserAccount(user.getId());
 
-			quolet.setCompany((Company) a);
+			quolet.setAuditor((Auditor) a);
 			quolet.setTicker(this.generar_ticker_quolet(new Date()));
 			quolet.setNumMonth(0);
 			quolet.setMoment(new Date());
@@ -132,7 +132,7 @@ public class QuoletService {
 			final Quolet copy = new Quolet();
 			copy.setId(res.getId());
 			copy.setVersion(res.getVersion());
-			copy.setCompany(res.getCompany());
+			copy.setAuditor(res.getAuditor());
 			copy.setTicker(res.getTicker());
 			copy.setNumMonth(res.getNumMonth());
 			copy.setMoment(res.getMoment());
@@ -153,16 +153,16 @@ public class QuoletService {
 
 	public void delete(final Quolet quolet) {
 		Assert.isTrue(quolet.getDraftMode() == 1);
-		Assert.isTrue(this.quoletRepository.getQuoletsByMyCompany(this.companyRepository.companyUserAccount(LoginService.getPrincipal().getId()).getId()).contains(quolet));
+		Assert.isTrue(this.quoletRepository.getQuoletsByMyAuditor(this.auditorRepository.auditorUserAccount(LoginService.getPrincipal().getId()).getId()).contains(quolet));
 		this.quoletRepository.delete(quolet);
 	}
 
 	public Collection<Quolet> getAllMyQuolets() {
-		return this.quoletRepository.getQuoletsByMyCompany(this.companyRepository.companyUserAccount(LoginService.getPrincipal().getId()).getId());
+		return this.quoletRepository.getQuoletsByMyAuditor(this.auditorRepository.auditorUserAccount(LoginService.getPrincipal().getId()).getId());
 	}
 
-	public Collection<Quolet> getMyQuoletsAuditor() {
-		return this.quoletRepository.getMyQuoletsAuditor(this.auditorRepository.auditorUserAccount(LoginService.getPrincipal().getId()).getId());
+	public Collection<Quolet> getMyQuoletsCompany() {
+		return this.quoletRepository.getMyQuoletsCompany(this.companyRepository.companyUserAccount(LoginService.getPrincipal().getId()).getId());
 	}
 
 	//METODOS AUXILIARES
@@ -237,12 +237,12 @@ public class QuoletService {
 
 		final UserAccount user = LoginService.getPrincipal();
 
-		if (user.getAuthorities().iterator().next().getAuthority().equals("COMPANY")) {
-			final Company c = (Company) this.actorService.getActorByUserAccount(user.getId());
-			quolets = (List<Quolet>) this.quoletRepository.getQuoletsByMyCompany(c.getId());
-		} else {
+		if (user.getAuthorities().iterator().next().getAuthority().equals("AUDITOR")) {
 			final Auditor a = (Auditor) this.actorService.getActorByUserAccount(user.getId());
-			quolets = (List<Quolet>) this.quoletRepository.getMyQuoletsAuditor(a.getId());
+			quolets = (List<Quolet>) this.quoletRepository.getQuoletsByMyAuditor(a.getId());
+		} else {
+			final Company c = (Company) this.actorService.getActorByUserAccount(user.getId());
+			quolets = (List<Quolet>) this.quoletRepository.getMyQuoletsCompany(c.getId());
 		}
 
 		for (int i = 0; i < quolets.size(); i++)

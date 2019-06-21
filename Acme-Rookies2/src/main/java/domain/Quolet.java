@@ -34,7 +34,7 @@ public class Quolet extends DomainEntity {
 	private int		draftMode;
 	private Audit	audit;
 	private Integer	numMonth;
-	private Company	company;
+	private Auditor	auditor;
 
 
 	@NotNull
@@ -118,11 +118,12 @@ public class Quolet extends DomainEntity {
 	@NotNull
 	@Valid
 	@ManyToOne(optional = false)
-	public Company getCompany() {
-		return this.company;
+	public Auditor getAuditor() {
+		return this.auditor;
 	}
 
-	public void setCompany(final Company company) {
-		this.company = company;
+	public void setAuditor(final Auditor auditor) {
+		this.auditor = auditor;
 	}
+
 }

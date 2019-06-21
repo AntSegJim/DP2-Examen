@@ -1062,7 +1062,7 @@
 		<property name="draftMode" value="0"></property>
 		<property name="audit" ref="audit3"></property>
 		<property name="numMonth" value="1"></property>
-		<property name="company" ref="company2"></property>
+		<property name="auditor" ref="auditor1"></property>
 	</bean>
 
 	<bean id="quolet2TEST" class="domain.Quolet">
@@ -1073,7 +1073,7 @@
 		<property name="draftMode" value="0"></property>
 		<property name="audit" ref="audit3"></property>
 		<property name="numMonth" value="2"></property>
-		<property name="company" ref="company2"></property>
+		<property name="auditor" ref="auditor1"></property>
 	</bean>
 
 	<bean id="quolet3TEST" class="domain.Quolet">
@@ -1084,7 +1084,7 @@
 		<property name="draftMode" value="0"></property>
 		<property name="audit" ref="audit2"></property>
 		<property name="numMonth" value="2"></property>
-		<property name="company" ref="company1"></property>
+		<property name="auditor" ref="auditor2"></property>
 	</bean>
 	
 		<bean id="quolet4TEST" class="domain.Quolet">
@@ -1095,7 +1095,7 @@
 		<property name="draftMode" value="0"></property>
 		<property name="audit" ref="audit2"></property>
 		<property name="numMonth" value="2"></property>
-		<property name="company" ref="company1"></property>
+		<property name="auditor" ref="auditor2"></property>
 	</bean>
 
 

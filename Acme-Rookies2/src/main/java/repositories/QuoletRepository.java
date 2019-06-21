@@ -13,15 +13,15 @@ import domain.Quolet;
 public interface QuoletRepository extends JpaRepository<Quolet, Integer> {
 
 	@Query("select q from Quolet q where q.audit.id = ?1")
-	public Collection<Quolet> getQuoletsByCompany(Integer idAudit);
-
-	@Query("select q from Quolet q where q.audit.id = ?1 and q.draftMode=0")
 	public Collection<Quolet> getQuoletsByAuditor(Integer idAudit);
 
-	@Query("select q from Quolet q where q.company.id = ?1")
-	public Collection<Quolet> getQuoletsByMyCompany(Integer idCompany);
+	@Query("select q from Quolet q where q.audit.id = ?1 and q.draftMode=0")
+	public Collection<Quolet> getQuoletsByCompany(Integer idAudit);
 
-	@Query("select q from Quolet q where q.audit.auditor.id = ?1 and q.draftMode=0")
-	public Collection<Quolet> getMyQuoletsAuditor(int idAuditor);
+	@Query("select q from Quolet q where q.auditor.id = ?1")
+	public Collection<Quolet> getQuoletsByMyAuditor(Integer idAuditor);
+	//*
+	@Query("select q from Quolet q join q.audit a join a.position p  where p.company.id =?1 and q.draftMode=0")
+	public Collection<Quolet> getMyQuoletsCompany(int idCompany);
 
 }
