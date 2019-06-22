@@ -22,7 +22,7 @@ import domain.Company;
 import domain.Quolet;
 
 @Controller
-@RequestMapping("/quolet/auditor")
+@RequestMapping("/quolet/company")
 public class QuoletCompanyrController {
 
 	@Autowired

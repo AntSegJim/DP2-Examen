@@ -15,8 +15,8 @@
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
 
-<security:authorize access="hasRole('COMPANY')">
-<form:form action="quolet/company/edit.do?idAudit=${audit.id }" modelAttribute="quolet">
+<security:authorize access="hasRole('AUDITOR')">
+<form:form action="quolet/auditor/edit.do?idAudit=${audit.id }" modelAttribute="quolet">
 
 	<jstl:if test="${not empty exception}">
 		<p style="color:red"> <spring:message code="position.error" /> </p>
@@ -39,7 +39,7 @@
 	value="<spring:message code="quolet.save" />" />
 	
 <input type="button" name="cancel" value="<spring:message code="quolet.cancel" />"
-			onclick="javascript: relativeRedir('quolet/company/list.do?idAudit=${audit.id}');" /> 	
+			onclick="javascript: relativeRedir('quolet/auditor/list.do?idAudit=${audit.id}');" /> 	
 			
 <jstl:if test="${quolet.id ne 0 }">
 <input type="submit" name="delete" 

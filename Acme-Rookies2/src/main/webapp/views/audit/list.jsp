@@ -50,8 +50,11 @@ requestURI="audit/auditor/list.do?idAuditor=${row.auditor.id}" >
 	<a href="audit/auditor/edit.do?auditId=${row.id}"><spring:message code="edit" /></a>
 </jstl:if>
 </display:column>
+
 <display:column>
-<a href="quolet/auditor/list.do?idAudit=${row.id}"><spring:message code="audit.quolet" /></a>
+<jstl:if test="${(row.draftMode eq 0)}">
+		<a href="quolet/auditor/list.do?idAudit=${row.id}"><spring:message code="audit.quolet" /></a>
+</jstl:if>
 </display:column>
 </display:table>
 
@@ -86,9 +89,6 @@ requestURI="audit/company/list.do?idPosition=${row.position.id}" >
 </display:column>
 <display:column titleKey="audit.draftMode">
 <jstl:out value="${row.draftMode}"></jstl:out>
-</display:column>
-<display:column>
-<a href="quolet/company/list.do?idAudit=${row.id}"><spring:message code="audit.quolet" /></a>
 </display:column>
 </display:table>
 
