@@ -71,12 +71,12 @@ public class QuoletService {
 		return this.quoletRepository.findOne(id);
 	}
 
-	public Collection<Quolet> getQuoletsByCompany(final Integer idAudit) {
-		return this.quoletRepository.getQuoletsByCompany(idAudit);
+	public Collection<Quolet> getQuoletsPerAuditByCompany(final Integer idAudit) {
+		return this.quoletRepository.getQuoletsPerAuditByCompany(idAudit);
 	}
 
-	public Collection<Quolet> getQuoletsByAuditor(final Integer idAudit) {
-		return this.quoletRepository.getQuoletsByAuditor(idAudit);
+	public Collection<Quolet> getQuoletsPerAuditByAuditor(final Integer idAudit) {
+		return this.quoletRepository.getQuoletsPerAuditByAuditor(idAudit);
 	}
 
 	public Quolet save(final Quolet q) {
@@ -121,7 +121,8 @@ public class QuoletService {
 			quolet.setAuditor((Auditor) a);
 			quolet.setTicker(this.generar_ticker_quolet(new Date()));
 			quolet.setNumMonth(0);
-			quolet.setMoment(new Date());
+			if (quolet.getDraftMode() == 0)
+				quolet.setMoment(new Date());
 			final Audit audit = this.auditRepository.findOne(idAudit);
 			quolet.setAudit(audit);
 

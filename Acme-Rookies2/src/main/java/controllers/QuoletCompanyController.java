@@ -23,7 +23,7 @@ import domain.Quolet;
 
 @Controller
 @RequestMapping("/quolet/company")
-public class QuoletCompanyrController {
+public class QuoletCompanyController {
 
 	@Autowired
 	private QuoletService	quoletService;
@@ -46,9 +46,9 @@ public class QuoletCompanyrController {
 			final Company c = (Company) this.actorService.getActorByUserAccount(user.getId());
 
 			final Audit a = this.auditRepository.findOne(idAudit);
-			Assert.isTrue(c.equals(a.getAuditor()));
+			Assert.isTrue(c.equals(a.getPosition().getCompany()));
 
-			quolets = this.quoletService.getQuoletsByCompany(idAudit);
+			quolets = this.quoletService.getQuoletsPerAuditByCompany(idAudit);
 			Assert.notNull(quolets);
 
 			this.quoletService.updateMonths();
@@ -59,6 +59,7 @@ public class QuoletCompanyrController {
 			result.addObject("quolets", quolets);
 			result.addObject("audit", a);
 			result.addObject("lang", lang);
+			result.addObject("position", a.getPosition());
 
 		} catch (final Exception e) {
 			result = new ModelAndView("redirect:../../");
@@ -66,7 +67,6 @@ public class QuoletCompanyrController {
 		return result;
 
 	}
-
 	@RequestMapping(value = "/show", method = RequestMethod.GET)
 	public ModelAndView show(@RequestParam final int idAudit, @RequestParam final int idQuolet) {
 		ModelAndView result;

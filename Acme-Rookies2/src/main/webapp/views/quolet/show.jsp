@@ -43,7 +43,9 @@
 				<spring:message code="quolet.inDraftMode" /><br/>
 			</jstl:otherwise>
 	</jstl:choose>
-	<spring:message code="quolet.picture" />: <jstl:out value="${quolet.picture}"></jstl:out> <br />
+	<spring:message code="quolet.picture" />: <br />
+	<img width="400px" height="200px" src="<jstl:out value='${quolet.picture }'/> "><br/>
+	 
 
 	<br>
 	<div style="text-align: center;">

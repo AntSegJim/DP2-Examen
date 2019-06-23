@@ -50,7 +50,7 @@ public class QuoletAuditorController {
 			Assert.isTrue(a.equals(au.getAuditor()));
 			Assert.isTrue(au.getDraftMode() == 0);
 
-			quolets = this.quoletService.getQuoletsByAuditor(idAudit);
+			quolets = this.quoletService.getQuoletsPerAuditByAuditor(idAudit);
 			Assert.notNull(quolets);
 
 			this.quoletService.updateMonths();
