@@ -71,12 +71,12 @@ public class QuoletService {
 		return this.quoletRepository.findOne(id);
 	}
 
-	public Collection<Quolet> getQuoletsByCompany(final Integer idAudit) {
-		return this.quoletRepository.getQuoletsByCompany(idAudit);
+	public Collection<Quolet> getQuoletsPerAuditByCompany(final Integer idAudit) {
+		return this.quoletRepository.getQuoletsPerAuditByCompany(idAudit);
 	}
 
-	public Collection<Quolet> getQuoletsByAuditor(final Integer idAudit) {
-		return this.quoletRepository.getQuoletsByAuditor(idAudit);
+	public Collection<Quolet> getQuoletsPerAuditByAuditor(final Integer idAudit) {
+		return this.quoletRepository.getQuoletsPerAuditByAuditor(idAudit);
 	}
 
 	public Quolet save(final Quolet q) {

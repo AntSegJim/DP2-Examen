@@ -50,7 +50,7 @@ public class QuoletCompanyController {
 			Assert.isTrue(c.equals(a.getPosition().getCompany()));
 			Assert.isTrue(a.getDraftMode() == 0);
 
-			quolets = this.quoletService.getQuoletsByCompany(idAudit);
+			quolets = this.quoletService.getQuoletsPerAuditByCompany(idAudit);
 			Assert.notNull(quolets);
 
 			this.quoletService.updateMonths();

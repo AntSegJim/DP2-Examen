@@ -48,7 +48,7 @@ public class QuoletAuditorController {
 			final Audit a = this.auditRepository.findOne(idAudit);
 			Assert.isTrue(c.equals(a.getAuditor()));
 
-			quolets = this.quoletService.getQuoletsByAuditor(idAudit);
+			quolets = this.quoletService.getQuoletsPerAuditByAuditor(idAudit);
 			Assert.notNull(quolets);
 
 			this.quoletService.updateMonths();
